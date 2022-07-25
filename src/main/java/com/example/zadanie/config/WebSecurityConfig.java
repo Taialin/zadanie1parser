@@ -25,10 +25,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .disable()
                 .authorizeRequests()
                 //Доступ только для не зарегистрированных пользователей
-                .antMatchers("pregistration//registration").not().fullyAuthenticated()
+                .antMatchers("pregistration/registration").not().fullyAuthenticated()
                 //Доступ только для пользователей с ролью Администратор
-                .antMatchers("/news/save").hasRole("ADMIN")
-                .antMatchers("/News.html").hasRole("USER")
+
+                .antMatchers("/news/save").permitAll()
+                .antMatchers("/news.html").hasRole("USER")
                 .antMatchers("/news/value").hasRole("USER")
                 //Доступ разрешен всем пользователей
                 .antMatchers("/", "/resources/**").permitAll()
@@ -38,7 +39,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //Настройка для входа в систему
                 .formLogin()
                 .loginPage("/login.html")
-                .loginProcessingUrl("/ping")
+
                 //Перенарпавление на главную страницу после успешного входа
                 .defaultSuccessUrl("/first.html")
                 .permitAll()
