@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:fmt="http://www.w3.org/1999/XSL/Transform">
+
+<form name='f' action="login.html" method='POST'>
+<h2>News</h2>
+<table border="1" >
+    <tr >
+        <th>id</th>
+        <th>title</th>
+        <th>link</th>
+        <th>pubDate</th>
+        <th>creator</th>
+        <th>category</th>
+        <th>guid</th>
+    </tr>
+    <th:each items="${tasks}" var="task">
+        <tr class="">
+            <td>${task.id}</td>
+            <td>${task.title}</td>
+            <td>${task.link}</td>
+            <td>${task.pubDate}</td>
+            <td>${task.creator}</td>
+            <td>${task.category}</td>
+            <td>${task.guid}</td>
+            <td>
+                <fmt:message key="task.list.status.text.${task.status}" />
+            </td>
+
+        </tr>
+    </th:each>
+
+    </tr>
+</table>
+</form>
+</html>
