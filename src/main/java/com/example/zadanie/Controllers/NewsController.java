@@ -25,10 +25,6 @@ public class NewsController {
         return newsServices.getAllNews();
     }
 
-    @RequestMapping("/news.html")
-    public String loginAfter() {
-        return "news.html";
-    }
 
     @GetMapping("/save")
     @CrossOrigin(origins = "*")

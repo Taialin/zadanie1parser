@@ -2,15 +2,12 @@ package com.example.zadanie.config;
 
 import com.example.zadanie.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -21,16 +18,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
-    @Bean
-    public AuthenticationSuccessHandler successHandler() {
-        SimpleUrlAuthenticationSuccessHandler handler = new SimpleUrlAuthenticationSuccessHandler();
-        handler.setUseReferer(true);
-        return handler;
-    }
-
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-
         httpSecurity
                 .csrf()
                 .disable()
@@ -50,10 +39,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //Настройка для входа в систему
                 .formLogin()
                 .loginPage("/login.html")
-                .successHandler(successHandler())
-                .permitAll()
+
                 //Перенарпавление на главную страницу после успешного входа
-                .defaultSuccessUrl("/news.html")
+                .defaultSuccessUrl("/first.html")
                 .permitAll()
                 .and()
                 .logout()
